@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CharacterList from './components/CharacterList';
+import Container from 'react-bootstrap/Container';
 import './App.css';
 
 class App extends Component {
@@ -34,7 +35,9 @@ class App extends Component {
     return (
       <div className="App">
         <h1 className="Header">React Wars</h1>
-        <CharacterList starwarsChars={this.state.starwarsChars} />
+        <div className="container">
+          <CharacterList starwarsChars={this.state.starwarsChars} />
+        </div>
       </div>
     );
   }

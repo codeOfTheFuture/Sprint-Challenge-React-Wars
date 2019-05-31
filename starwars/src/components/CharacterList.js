@@ -1,12 +1,14 @@
 import React from 'react';
 import Character from './Character';
+import { Card } from 'react-bootstrap';
+import './StarWars.css';
 
 const CharacterList = props => {
   return props.starwarsChars.map(char => {
     return (
-      <div>
+      <Card className="card" style={{ width: '18rem' }}>
         <Character Character={char} />
-      </div>
+      </Card>
     );
   });
 };
