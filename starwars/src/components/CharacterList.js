@@ -6,7 +6,7 @@ import './StarWars.css';
 const CharacterList = props => {
   return props.starwarsChars.map(char => {
     return (
-      <Card className="card" style={{ width: '18rem' }}>
+      <Card className="card" key={char.created} style={{ width: '18rem' }}>
         <Character Character={char} />
       </Card>
     );

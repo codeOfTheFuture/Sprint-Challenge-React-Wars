@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import CharacterList from './components/CharacterList';
-import Container from 'react-bootstrap/Container';
+import { Container, Button } from 'react-bootstrap';
 import './App.css';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      starwarsChars: []
+      starwarsChars: [],
+      page: 1
     };
   }
 
@@ -31,13 +32,48 @@ class App extends Component {
       });
   };
 
+  nextPage = () => {
+    if (this.state.page < 9) {
+      const nextPage = this.state.page + 1;
+
+      this.setState({
+        page: nextPage
+      });
+
+      this.getCharacters(`https://swapi.co/api/people/?page=${nextPage}`);
+    }
+  };
+
+  previousPage = () => {
+    if (this.state.page > 1) {
+      const prevPage = this.state.page - 1;
+
+      this.setState({
+        page: prevPage
+      });
+
+      this.getCharacters(`https://swapi.co/api/people/?page=${prevPage}`);
+    }
+  };
+
   render() {
     return (
       <div className="App">
         <h1 className="Header">React Wars</h1>
-        <div className="container">
-          <CharacterList starwarsChars={this.state.starwarsChars} />
-        </div>
+        <Container className="container">
+          <div className="buttons">
+            <Button className="mx-5" onClick={this.previousPage}>
+              Prev
+            </Button>
+            <div>{this.state.page}</div>
+            <Button onClick={this.nextPage} className="mx-5">
+              Next
+            </Button>
+          </div>
+          <div className="characters">
+            <CharacterList starwarsChars={this.state.starwarsChars} />
+          </div>
+        </Container>
       </div>
     );
   }
